@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <math.h>
+
+double log2_factorial(int n) {
+    double sum = 0;
+    for (int i = 1; i <= n; i++)
+        sum += log2(i);
+    return sum;
+}
+
+int main() {
+    double total_keys = log2_factorial(25);  
+    double unique_keys = total_keys - 10;  
+
+    printf("Total possible keys ˜ 2^%.2f\n", total_keys);
+    printf("Effectively unique keys ˜ 2^%.2f\n", unique_keys);
+
+    return 0;
+}
