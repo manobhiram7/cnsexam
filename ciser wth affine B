@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+void decrypt(char text[]) {
+    for (int i = 0; text[i] != '\0'; i++)
+        if (text[i] >= 'A' && text[i] <= 'Z')
+            text[i] = (9 * (text[i] - 'A' - 1 + 26) % 26) + 'A';
+}
+
+int main() {
+    char text[] = "BUEXAMPLE";
+    decrypt(text);
+    printf("Decrypted: %s\n", text);
+    return 0;
+}
