@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#define N 2  
+int keyMatrix[N][N] = {{6, 24}, {1, 13}};  
+void encrypt(char text[]) {
+    int i, a, b;
+    for (i = 0; text[i] != '\0'; i += 2) {
+        a = text[i] - 'A';
+        b = text[i + 1] - 'A';
+        text[i] = ((keyMatrix[0][0] * a + keyMatrix[0][1] * b) % 26) + 'A';
+        text[i + 1] = ((keyMatrix[1][0] * a + keyMatrix[1][1] * b) % 26) + 'A';
+    }
+}
+int main() {
+    char text[100];
+    printf("Enter text (even length): ");
+    scanf("%s", text);
+    encrypt(text);
+    printf("Encrypted: %s\n", text);
+    return 0;
+}
