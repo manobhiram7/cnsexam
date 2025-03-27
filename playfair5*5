@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+char keySquare[100][100] = { "PLAYF", "IRBCD", "EGHKM", "NOQST", "UVWXZ" };
+void find(char ch, int *r, int *c) {
+    if (ch == 'J') ch = 'I';
+    for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 5; j++)
+            if (keySquare[i][j] == ch) {
+                *r = i, *c = j;
+                return;
+            }
+}
+
+void encrypt(char text[]) {
+    int r1, c1, r2, c2;
+    for (int i = 0; text[i] != '\0'; i += 2) {
+        find(text[i], &r1, &c1);
+        find(text[i + 1], &r2, &c2);
+        if (r1 == r2) text[i] = keySquare[r1][(c1 + 1) % 5], text[i + 1] = keySquare[r2][(c2 + 1) % 5];
+        else if (c1 == c2) text[i] = keySquare[(r1 + 1) % 5][c1], text[i + 1] = keySquare[(r2 + 1) % 5][c2];
+        else text[i] = keySquare[r1][c2], text[i + 1] = keySquare[r2][c1];
+    }
+}
+
+int main() {
+    char text[100];
+    printf("Enter text: ");
+    scanf("%s", text);
+    encrypt(text);
+    printf("Encrypted: %s\n", text);
+    return 0;
+}
